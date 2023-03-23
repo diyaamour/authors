@@ -6,6 +6,8 @@ export const Authors = (props) => {
     const [authors, setAuthors] = useState([]);
     const [error, setError] = useState(false);
 
+    const [deletedAuthorId, setDeletedAuthorId] = useState(null);
+
     useEffect(() => {
         axios
             .get("http://localhost:8000/api/authors")
@@ -16,14 +18,25 @@ export const Authors = (props) => {
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
+    }, [deletedAuthorId]);
+
+    const deleteAuthor = (id) => {
+        axios
+            .delete(`http://localhost:8000/api/authors/${id}`)
+            .then((response) => {
+                setDeletedAuthorId(id);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
 
     return (
         <div className="w-50 mx-auto text-center">
             <nav className="navbar navbar-expand-lg  d-inline navbar-light bg-light sticky-top justify-content-center mb-4">
                 <h1>Favorite Authors</h1>
                 <button type="button" class="btn btn-outline-dark">Add an Author  🖊️ </button>
-                
+
             </nav>
             <hr />
             {authors.map((author) => {
@@ -42,8 +55,17 @@ export const Authors = (props) => {
                 return (
                     <div key={_id} className="shadow mb-4 rounded border p-4">
                         <h2>{name}</h2>
-                        <p><span style={{fontWeight:"bold"}}>Date of Birth: </span>{formattedBirthDate}</p>
-                        <p><span style={{fontWeight:"bold"}}>Nationality: </span>{nationality}</p>
+                        <p><span style={{ fontWeight: "bold" }}>Date of Birth: </span>{formattedBirthDate}</p>
+                        <p><span style={{ fontWeight: "bold" }}>Nationality: </span>{nationality}</p>
+
+                        <div>
+                            <button onClick={(event) => deleteAuthor(_id)}
+                                className="btn btn-sm btn-outline-danger mx-1"
+                            >
+                                Delete
+                            </button>
+                            {/* <Link to={`/products/${_id}/edit`} className="btn btn-sm btn-outline-primary mx-1">Edit</Link> */}
+                        </div>
                     </div>
                 );
             })
