@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 
+import { Link } from "react-router-dom";
+
 export const Authors = (props) => {
     const [authors, setAuthors] = useState([]);
     const [error, setError] = useState(false);
@@ -33,9 +35,9 @@ export const Authors = (props) => {
 
     return (
         <div className="w-50 mx-auto text-center">
-            <nav className="navbar navbar-expand-lg  d-inline navbar-light bg-light sticky-top justify-content-center mb-4">
+            <nav className="navbar navbar-expand-lg d-inline navbar-light bg-light justify-content-center mb-4">
                 <h1>Favorite Authors</h1>
-                <button type="button" class="btn btn-outline-dark">Add an Author  🖊️ </button>
+                <Link class="btn btn-outline-dark" to='/authors/new'>Add an Author  🖊️ </Link>
 
             </nav>
             <hr />
@@ -44,8 +46,6 @@ export const Authors = (props) => {
                 const { _id, name, dateOfBirth, nationality } = author;
 
                 const birthDate = new Date(dateOfBirth);
-
-                // format the date using toLocaleDateString with the desired options
                 const formattedBirthDate = birthDate.toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "2-digit",
@@ -54,7 +54,9 @@ export const Authors = (props) => {
 
                 return (
                     <div key={_id} className="shadow mb-4 rounded border p-4">
-                        <h2>{name}</h2>
+                        <h2>
+                            <Link to={`/authors/${_id}`}>{name}</Link> 
+                            </h2>
                         <p><span style={{ fontWeight: "bold" }}>Date of Birth: </span>{formattedBirthDate}</p>
                         <p><span style={{ fontWeight: "bold" }}>Nationality: </span>{nationality}</p>
 
@@ -64,7 +66,7 @@ export const Authors = (props) => {
                             >
                                 Delete
                             </button>
-                            {/* <Link to={`/products/${_id}/edit`} className="btn btn-sm btn-outline-primary mx-1">Edit</Link> */}
+                            <Link to={`/authors/${_id}/edit`} className="btn btn-sm btn-outline-primary mx-1">Edit</Link>
                         </div>
                     </div>
                 );
