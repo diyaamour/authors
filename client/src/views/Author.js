@@ -53,7 +53,7 @@ export const Author = (props) => {
     return (
 
         <div className="w-50 mx-auto text-center">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top justify-content-center mb-4">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light justify-content-center mb-4">
                 <h1 ><Link to='/' className="text-decoration-none" style={{ color: 'black' }}>Favorite Authors</Link> </h1>
             </nav>
             <div className="shadow mb-4 rounded border p-4">
