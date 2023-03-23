@@ -5,6 +5,8 @@ import { Link, Route, Routes, Navigate } from "react-router-dom";
 import { NotFound } from './views/NotFound';
 import { Authors } from './components/Authors';
 import { Author } from './views/Author';
+import { EditAuthor } from './views/EditAuthor';
+import { AddAuthor } from './views/AddAuthor';
 
 function App() {
   return (
@@ -12,7 +14,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Authors/>} />
         <Route path="/authors/:id" element={<Author/>} />
-        <Route path="*" element={<NotFound.js />} />
+        <Route path='/authors/new' element={<AddAuthor />}/>
+        <Route path="/authors/:id/edit" element={<EditAuthor/>} />
+        <Route path="*" element={<NotFound/>} />
       </Routes>
     </div>
   );
