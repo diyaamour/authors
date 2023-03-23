@@ -14,7 +14,7 @@ export const EditAuthor = (props) => {
     const [nationality, setNationality] = useState("");
     const [imageUrl, setImageUrl] = useState("");
 
-    const [errors, setErrors] = useState({});
+    const [validationErrors, setValidationErrors] = useState(null);
 
     useEffect(() => {
         axios
@@ -32,7 +32,7 @@ export const EditAuthor = (props) => {
         })
         .catch((err) => {
             console.log(err);
-            setErrors(err.response.data);
+            
         });
     }, [id]);
 
@@ -53,9 +53,16 @@ export const EditAuthor = (props) => {
             })
             .catch((err) => {
                 console.log(err);
-                setErrors(err.response.data);
+                setValidationErrors(err?.response?.data?.errors);
             });
     };
+
+    // const birthDate = new Date(dateOfBirth);
+    // const formattedBirthDate = birthDate.toLocaleDateString("en-US", {
+    //     year: "numeric",
+    //     month: "2-digit",
+    //     day: "2-digit"
+    // }).replace(/\//g, "-").split("-").reverse().join("-");
 
     return (
         <div className="w-50 p-4 rounded mx-auto shadow">
@@ -68,6 +75,7 @@ export const EditAuthor = (props) => {
             >
                 <div className="form-group">
                     <label className="h6">Name:</label>
+                    {validationErrors?.name && <span className='text-danger ms-1'>{validationErrors.name.message}</span>}
                     <input
                         value={name}
                         onChange={(event) => {
@@ -80,6 +88,7 @@ export const EditAuthor = (props) => {
 
                 <div className="form-group">
                     <label className="h6">Date of Birth:</label>
+                    {validationErrors?.dateOfBirth && <span className='text-danger ms-1'>{validationErrors.dateOfBirth.message}</span>}
                     <input
                         value={dateOfBirth}
                         onChange={(event) => {
@@ -92,6 +101,7 @@ export const EditAuthor = (props) => {
 
                 <div className="form-group">
                     <label className="h6">Nationality:</label>
+                    {validationErrors?.nationality && <span className='text-danger ms-1'>{validationErrors.nationality.message}</span>}
                     <input
                         value={nationality}
                         onChange={(event) => {
@@ -103,6 +113,7 @@ export const EditAuthor = (props) => {
                 </div>
                 <div className="form-group">
                     <label className="h6">Image URL:</label>
+                    {validationErrors?.imageUrl && <span className='text-danger ms-1'>{validationErrors.imageUrl.message}</span>}
                     <input
                         value={imageUrl}
                         onChange={(event) => {

@@ -10,7 +10,7 @@ export const AddAuthor = (props) => {
     const [nationality, setNationality] = useState("");
     const [imageUrl, setImageUrl] = useState("");
 
-    const [errors, setErrors] = useState(null);
+    const [validationErrors, setValidationErrors] = useState(null);
 
     const navigate = useNavigate();
 
@@ -36,9 +36,9 @@ export const AddAuthor = (props) => {
             })
             .catch((err) => {
                 console.log(err);
-                setErrors(err);
+                setValidationErrors(err?.response?.data?.errors);
             });
-    }
+    };
 
     return (
         <div className="w-55 p-4 rounded mx-auto shadow" style={{marginTop: 20}}>
@@ -49,6 +49,7 @@ export const AddAuthor = (props) => {
             <form onSubmit={handleAuthorSubmit}>
                 <div className="form-group">
                     <label className="h6 ">Name:</label>
+                    {validationErrors?.name && <span className='text-danger ms-1'>{validationErrors.name.message}</span>}
                     <input onChange={(e) => {
                         setName(e.target.value);
                     }}
@@ -59,6 +60,7 @@ export const AddAuthor = (props) => {
                 </div>
                 <div className="form-group">
                     <label className="h6">Date of Birth: </label>
+                    {validationErrors?.dateOfBirth && <span className='text-danger ms-1'>{validationErrors.dateOfBirth.message}</span>}
                     <input onChange={(e) => {
                         setDateOfBirth(e.target.value);
                     }}
@@ -69,6 +71,7 @@ export const AddAuthor = (props) => {
                 </div>
                 <div className="form-group">
                     <label className="h6">Nationality:</label>
+                    {validationErrors?.nationality && <span className='text-danger ms-1'>{validationErrors.nationality.message}</span>}
                     <input onChange={(e) => {
                         setNationality(e.target.value);
                     }}
@@ -79,6 +82,7 @@ export const AddAuthor = (props) => {
                 </div>
                 <div className="form-group">
                     <label className="h6">Image URL:</label>
+                    {validationErrors?.imageUrl && <span className='text-danger ms-1'>{validationErrors.imageUrl.message}</span>}
                     <input onChange={(e) => {
                         setImageUrl(e.target.value);
                     }}

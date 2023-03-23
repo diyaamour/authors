@@ -28,7 +28,7 @@ export const Author = (props) => {
             .delete(`http://localhost:8000/api/authors/${id}`)
             .then((res) => {
                 console.log(res);
-                navigate("/authors");
+                navigate("/");
             })
             .catch((err) => {
                 console.log(err);
