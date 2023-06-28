@@ -1,6 +1,6 @@
 import './App.css';
 
-import { Link, Route, Routes, Navigate } from "react-router-dom";
+import {  Route, Routes } from "react-router-dom";
 
 import { NotFound } from './views/NotFound';
 import { Authors } from './components/Authors';
