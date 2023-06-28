@@ -59,7 +59,6 @@ export const Authors = (props) => {
                             </h2>
                         <p><span style={{ fontWeight: "bold" }}>Date of Birth: </span>{formattedBirthDate}</p>
                         <p><span style={{ fontWeight: "bold" }}>Nationality: </span>{nationality}</p>
-
                         <div>
                             <button onClick={(event) => deleteAuthor(_id)}
                                 className="btn btn-sm btn-outline-danger mx-1"

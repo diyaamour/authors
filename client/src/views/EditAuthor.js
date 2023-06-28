@@ -123,7 +123,6 @@ export const EditAuthor = (props) => {
                         className="form-control"
                     />
                 </div>
-
                 <button className="btn btn-sm btn-outline-success mt-2">Submit</button>
             </form>
         </div>
