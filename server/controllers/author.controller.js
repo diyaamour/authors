@@ -29,8 +29,8 @@ const handleGetAuthorById = async (req, res) => {
         return res.status(400).json({ ...error, message: error.message });
     }
 };
-const handleUpdateAuthorByid = async (req, res) => {
-    console.log('controller: handleUpdateAuthorByid', req.params, req.body);
+const handleUpdateAuthorById = async (req, res) => {
+    console.log('controller: handleUpdateAuthorById', req.params, req.body);
 
     try{
         const author = await Author.findByIdAndUpdate(req.params.id, req.body,
@@ -58,6 +58,7 @@ module.exports = {
     handleCreateAuthor,
     handleGetAllAuthors,
     handleGetAuthorById,
-    handleUpdateAuthorByid,
+    handleUpdateAuthorById,
     handleDeleteAuthorById
 }
+
